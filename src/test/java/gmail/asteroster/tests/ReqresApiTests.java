@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ReqresApiTests {
 
     @Test
-    void SingleUserTest() {
+    void singleUserTest() {
         given()
                 .log().uri()
                 .when()
@@ -31,7 +31,7 @@ public class ReqresApiTests {
     }
 
     @Test
-    void CreatePostTest() {
+    void createUserTest() {
         String createRq = "{\n" + " \"name\": \"morpheus\",\n" + " \"job\": \"leader\"\n" + "}";
 
         given()
@@ -47,6 +47,7 @@ public class ReqresApiTests {
                 .statusCode(201)
                 .body("name", is("morpheus"));
     }
+
     @Test
     void deleteTest () {
         delete("https://reqres.in/api/users/2")
