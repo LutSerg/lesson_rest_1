@@ -18,11 +18,12 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 @Tag("demowebshop")
-public class DemowebshopTests {
+public class DemowebshopTests extends TestBase{
 
     static String login = "qaguru@qa.guru",
             password = "qaguru@qa.guru1",
             authCookieName = "NOPCOMMERCE.AUTH";
+
 
     @Test
     @DisplayName("Successful authorization to some demowebshop (UI)")
@@ -243,29 +244,5 @@ public class DemowebshopTests {
                 open(""));
         step("Verify cart size", () ->
                 $("#topcartlink .cart-qty").shouldHave(text(cartSize)));
-    }
-
-    @Test
-    @DisplayName("")
-    void addProductToCartAsNewUserTest() {
-        String body = "product_attribute_72_5_18=53" +
-                "&product_attribute_72_6_19=54" +
-                "&product_attribute_72_3_20=57" +
-                "&addtocart_72.EnteredQuantity=1";
-
-        given()
-                .filter(withCustomTemplates())
-                .contentType("application/x-www-form-urlencoded")
-                .body(body)
-                .log().all()
-                .when()
-                .post("/addproducttocart/details/72/1")
-                .then()
-                .log().all()
-                .statusCode(200)
-                .body("success", is(true))
-                .body("message", is("The product has been added to your <a href=\"/cart\">shopping cart</a>"))
-                .body("updateflyoutcartsectionhtml", notNullValue())
-                .body("updatetopcartsectionhtml", is("(1)"));
     }
 }

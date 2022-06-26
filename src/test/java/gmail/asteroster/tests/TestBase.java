@@ -17,14 +17,12 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class TestBase {
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
-        String  authCookieName = "NOPCOMMERCE.AUTH";
-
-        String selenoid = System.getProperty("selenoidUrl", "selenoid.autotests.cloud/wd/hub");
 
         Configuration.baseUrl = System.getProperty("baseUrl", "http://demowebshop.tricentis.com");
         RestAssured.baseURI = System.getProperty("baseURI", "http://demowebshop.tricentis.com");
+        String selenoid = System.getProperty("selenoidUrl", "selenoid.autotests.cloud/wd/hub");
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
         Configuration.remote = "https://" + config.login() + ":" + config.password() + "@" + selenoid;
